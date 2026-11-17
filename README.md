@@ -33,13 +33,16 @@ dotnet new buildprops --use-artifacts
 dotnet new packagesprops
 
 # to ensure dotnet version
-dotnet new globaljson --sdk-version 10.0.400 --roll-forward latestFeature
+dotnet new globaljson --sdk-version 10.0.404 --roll-forward latestFeature
 ```
 
 ```bash
 dotnet package list --outdated
 
 dotnet package update
+
+# re-generage packages.lock.json
+dotnet restore --force-evaluate
 ```
 
 ```bash
