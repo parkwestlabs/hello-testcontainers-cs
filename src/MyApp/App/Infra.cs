@@ -5,5 +5,5 @@ namespace MyApp.App;
 
 public class MyDbContext(DbContextOptions<MyDbContext> options) : DbContext(options)
 {
-    public DbSet<User> Users => this.Set<User>();
+    public DbSet<User> Users => Set<User>();
 }

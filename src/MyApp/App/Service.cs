@@ -11,7 +11,7 @@ public class UserService(IDbContextFactory<MyDbContext> contextFactory)
     {
         using var context = await _contextFactory.CreateDbContextAsync();
 
-        context.Users.Add(new User { Name = name });
-        await context.SaveChangesAsync();
+        _ = context.Users.Add(new User { Name = name });
+        _ = await context.SaveChangesAsync();
     }
 }

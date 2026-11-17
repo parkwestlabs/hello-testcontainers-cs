@@ -21,7 +21,7 @@ public class UserServiceTests
         Npgsql.NpgsqlConnection.ClearAllPools();
 
         var services = new ServiceCollection();
-        services.AddDbContextFactory<MyDbContext>(options =>
+        _ = services.AddDbContextFactory<MyDbContext>(options =>
             options.UseNpgsql(connectionString));
 
         _serviceProvider = services.BuildServiceProvider();
@@ -29,8 +29,8 @@ public class UserServiceTests
 
         // テストごとにテーブルを真っさらにする（DBを削除して再作成）
         using var context = await _contextFactory.CreateDbContextAsync(TestContext.CancellationToken);
-        await context.Database.EnsureDeletedAsync(TestContext.CancellationToken);
-        await context.Database.EnsureCreatedAsync(TestContext.CancellationToken);
+        _ = await context.Database.EnsureDeletedAsync(TestContext.CancellationToken);
+        _ = await context.Database.EnsureCreatedAsync(TestContext.CancellationToken);
     }
 
     [TestCleanup]
@@ -47,7 +47,7 @@ public class UserServiceTests
     {
         // Arrange (準備)
         var userService = new UserService(_contextFactory);
-        string testName = "Alice";
+        var testName = "Alice";
 
         // Act (実行)
         await userService.AddUserAsync(testName);
@@ -61,5 +61,5 @@ public class UserServiceTests
         Assert.IsGreaterThan(0, user.Id); // 自動採番されているか
     }
 
-    public TestContext TestContext { get; set; }
+    public TestContext TestContext { get; set; } = null!; // suppress CS8618 for dotnet format
 }

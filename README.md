@@ -33,7 +33,7 @@ dotnet new buildprops --use-artifacts
 dotnet new packagesprops
 
 # to ensure dotnet version
-dotnet new globaljson
+dotnet new globaljson --sdk-version 10.0.400 --roll-forward latestFeature
 ```
 
 ```bash
@@ -49,4 +49,13 @@ dotnet add src/MyApp package Microsoft.EntityFrameworkCore.Design
 dotnet add src/MyApp package Npgsql.EntityFrameworkCore.PostgreSQL
 
 dotnet add tests/MyApp.Tests package Testcontainers.PostgreSql
+```
+
+```bash
+# fix CHARSET ENDOFLINE FINALNEWLINE
+dotnet format whitespace
+
+# find and convert CRLF to LF
+git ls-files --eol | grep "i/crlf\|w/crlf"
+git add --renormalize .
 ```

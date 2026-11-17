@@ -1,4 +1,4 @@
-﻿namespace MyApp.Tests;
+namespace MyApp.Tests;
 
 [TestClass]
 public sealed class Test1
